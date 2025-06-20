@@ -22,9 +22,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'npx pm2 start index.js  true'
-        sh 'npx pm2 restart index.js  true'
+                sh 'npx pm2 start index.js || npx pm2 restart index.js'
             }
         }
     }
 }
+
