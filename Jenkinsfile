@@ -2,17 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/dr-programmer/jenkins-demo.git'
+            }
+        }
+
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
 
-        stage('Run') {
+        stage('Build') {
             steps {
-                sh 'node index.js'
+                echo 'No build step for this simple app.'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'npx pm2 start index.js  true'
+        sh 'npx pm2 restart index.js  true'
             }
         }
     }
 }
-
